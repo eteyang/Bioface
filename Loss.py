@@ -34,29 +34,29 @@ class Loss(nn.Module):
         priorloss = (priorB)*blossweight
         #ZY = torch.ones(len(priorloss))
         #priorloss = priorloss * ZY
-        print("prior loss:")
-        print(priorloss)
+        # print("prior loss:")
+        # print(priorloss)
 
         delta = (images - rgbim) * actualmasks
         #print((torch.sum(delta**2)/(90*90)))
         appearanceloss = (torch.sum(delta**2)/(224 * 224))*appweight*100
         #Y = torch.ones(len(appearanceloss))
         #appearanceloss = appearanceloss * Y
-        print("appearance loss:")
-        print(appearanceloss)
+        # print("appearance loss:")
+        # print(appearanceloss)
 
         shadingloss = torch.sum(alpha**2) * Shadingweight
         #ff = torch.ones(len(shadingloss))
         #shadingloss = shadingloss * ff
-        print("shading loss:")
-        print(shadingloss)
+        # print("shading loss:")
+        # print(shadingloss)
 
         #print(Specularities.shape)
         sparsityloss = torch.sum(Specularities)*sparseweight
         #J = torch.ones(len(sparsityloss))
         #sparsityloss = sparsityloss * J
-        print("sparsity loss:")
-        print(sparsityloss)
+        # print("sparsity loss:")
+        # print(sparsityloss)
 
         loss = appearanceloss + priorloss + sparsityloss #+ shadingloss
         return loss
